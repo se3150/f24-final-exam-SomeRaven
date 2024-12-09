@@ -18,7 +18,7 @@ jobs:
       - name: Install pytest
         run: pip install pytest pytest-spec pytest-describe
       - name: install psutil
-        run: pip intall psutil
+        run: pip install psutil
       - name: Run pytest
         run: pytest --spec --color=yes test_brute.py
   RunFunctionalTests:
