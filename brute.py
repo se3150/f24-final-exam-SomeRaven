@@ -4,8 +4,9 @@ class Brute: # a brute-force cracker
 
     # secret_string is the plain-text string we'll encrypt and then try to crack
     # target is the encrypted version of secret_string
-    def __init__(self, secret_string):
+    def __init__(self, secret_string, external_monitor=None):
         self.target = self.hash(secret_string)
+        self.external_monitor = external_monitor
 
     # encrypts a string (s) and returns the encrypted string
     def hash(self, s):
@@ -26,6 +27,8 @@ class Brute: # a brute-force cracker
     # returns the number of seconds required to crack, or -1 if unsuccessful
     def bruteMany(self, limit=10000000):
         t = time.time()
+        if self.external_monitor:
+            self.external_monitor.notify_bruteMany(limit)
         for i in range(limit):
             if self.bruteOnce(self.randomGuess()):
                 return time.time() - t
